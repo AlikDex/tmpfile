@@ -1,10 +1,14 @@
 {
     "name": "alikdex/tmpfile",
     "description": "Alternative work with temporary files in php",
-    "type": "project",
+    "keywords": ["files", "tmp", "php tmp files", "php temp", "temp", "temp files"],
     "license": "MIT",
-    "minimum-stability": "dev",
-    "prefer-stable": true,
+    "authors": [
+        {
+            "name": "The Ant",
+            "email": "alikdex@gmail.com"
+        }
+    ],
     "require": {
         "php": ">=7.2"
     },
