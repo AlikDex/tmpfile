@@ -1,12 +1,12 @@
 # tmpfile
 Alternative work with temporary files in php
 
-###Install
+### Install
 ```
 composer require alikdex/tmpfile
 ```
 
-###Usage
+### Usage
 ```php
 <?php
 
