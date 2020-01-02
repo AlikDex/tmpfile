@@ -35,10 +35,10 @@ $tmpfile->append('baz');
 // Gets content
 $tmpfile->read();
 
-// Cut a piece of content: read($offset, $length);
+// Read a piece of content: read($offset, $length);
 $tmpfile->read(7, 5);
 
-// Remove file
+// Delete file manually (by default, this applied when object destruct)
 $tmpfile->delete();
 
 // Keed after usage (don't delete)
