@@ -14,6 +14,11 @@ final class TmpFile
     private $filename;
 
     /**
+     * @var string Default mode of this file.
+     */
+    const CHMOD_MODE = 0600;
+
+    /**
      * Constructor
      *
      * @param string $data The tmp file content.
@@ -41,6 +46,9 @@ final class TmpFile
 
         if ($content) {
             $this->write($this->filename, $content);
+        } else {
+            \touch($this->filename);
+            \chmod($this->filename, static::CHMOD_MODE);
         }
     }
 
@@ -54,7 +62,7 @@ final class TmpFile
      */
     public function write(string $data, int $flags = 0)
     {
-        return \file_put_contents($this->filename, $data, $flags);
+        return \file_put_contents($this->filename, $data, $flags, static::CHMOD_MODE);
     }
 
     /**
