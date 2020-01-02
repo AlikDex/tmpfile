@@ -53,6 +53,33 @@ final class TmpFile
     }
 
     /**
+     * Read entire file or chunk
+     *
+     * @param int $offset
+     * @param int $maxlen
+     *
+     * @return string
+     *
+     * @throws \RuntimeException
+     */
+    public function read(...$args): string
+    {
+        \set_error_handler(function ($type, $message) use (&$error) {
+            $error = $message;
+        });
+
+        $content = \file_get_contents($this->filename, false, null, ...$args);
+
+        \restore_error_handler();
+
+        if (false === $content) {
+            throw new \RuntimeException($error);
+        }
+
+        return $content;
+    }
+
+    /**
      * Write the data to a file
      *
      * @param mixed $data
