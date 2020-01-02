@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use TA\TmpFile;
 use PHPUnit\Framework\TestCase;
 
 final class TmpFileTest extends TestCase
@@ -9,7 +10,7 @@ final class TmpFileTest extends TestCase
     {
         $tmpfile = new TmpFile;
 
-        $this->assertFileExists($tmpfile->getPahtname());
+        $this->assertFileExists($tmpfile->getPathname());
     }
 
     public function testCreateWithContent()
@@ -17,7 +18,7 @@ final class TmpFileTest extends TestCase
         $data = $this->generateTestContent();
         $tmpfile = new TmpFile($data);
 
-        $this->assertStringEqualsFile($tmpfile->getPahtname(), $data);
+        $this->assertStringEqualsFile($tmpfile->getPathname(), $data);
     }
 
     protected function generateTestContent()
