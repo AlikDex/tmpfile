@@ -1,6 +1,6 @@
 {
     "name": "alikdex/tmpfile",
-    "description": "Php temporary file",
+    "description": "Alternative work with temporary files in php",
     "type": "project",
     "license": "MIT",
     "minimum-stability": "dev",
