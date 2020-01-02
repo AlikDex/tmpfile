@@ -14,19 +14,14 @@ final class TmpFile
     private $filename;
 
     /**
-     * @var string Default mode of this file.
-     */
-    const CHMOD_MODE = 0600;
-
-    /**
      * Constructor
      *
-     * @param string $data The tmp file content.
+     * @param string $content The tmp file content.
      * @param string|null $suffix The optional suffix for the tmp file.
      * @param string|null $prefix The optional prefix for the tmp file. If null 'php_tmpfile_' is used.
      * @param string|null $directory Directory where the file should be created. Autodetected if not provided.
      */
-    public function __construct($data = '', $suffix = null, $prefix = null, $directory = null)
+    public function __construct($content = '', $suffix = null, $prefix = null, $directory = null)
     {
         if (null === $directory) {
             $directory = static::getTempDir();
@@ -45,10 +40,9 @@ final class TmpFile
         }
 
         if ($content) {
-            $this->write($this->filename, $content);
+            $this->write($content);
         } else {
             \touch($this->filename);
-            \chmod($this->filename, static::CHMOD_MODE);
         }
     }
 
@@ -89,7 +83,7 @@ final class TmpFile
      */
     public function write(string $data, int $flags = 0)
     {
-        return \file_put_contents($this->filename, $data, $flags, static::CHMOD_MODE);
+        return \file_put_contents($this->filename, $data, $flags);
     }
 
     /**
