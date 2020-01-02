@@ -6,7 +6,7 @@ final class TmpFile
     /**
      * @var bool Delete this file automatically.
      */
-    public $autoRemove = true;
+    public $autoDelete = true;
 
     /**
      * @var string The name of this file.
@@ -21,10 +21,10 @@ final class TmpFile
      * @param string|null $prefix The optional prefix for the tmp file. If null 'php_tmpfile_' is used.
      * @param string|null $directory Directory where the file should be created. Autodetected if not provided.
      */
-    public function __construct($content = '', $suffix = null, $prefix = null, $directory = null)
+    public function __construct(string $content = '', string $suffix = null, string $prefix = null, string $directory = null)
     {
         if (null === $directory) {
-            $directory = static::getTempDir();
+            $directory = static::getTempDirectory();
         }
 
         if (null === $prefix) {
@@ -56,7 +56,7 @@ final class TmpFile
      *
      * @throws \RuntimeException
      */
-    public function read(...$args): string
+    public function read(int ...$args): string
     {
         \set_error_handler(function ($type, $message) use (&$error) {
             $error = $message;
@@ -93,7 +93,7 @@ final class TmpFile
      *
      * @return int|false
      */
-    public function append($data)
+    public function append(string $data)
     {
         return $this->write($data, FILE_APPEND);
     }
@@ -113,7 +113,7 @@ final class TmpFile
      *
      * @return string The path of the temp directory.
      */
-    public static function getTempDir(): string
+    public static function getTempDirectory(): string
     {
         if (\function_exists('sys_get_temp_dir')) {
             return \sys_get_temp_dir();
@@ -143,11 +143,11 @@ final class TmpFile
     }
 
     /**
-     * Delete tmp file on shutdown if `$autoRemove` is `true`
+     * Delete tmp file on shutdown if `$autoDelete` is `true`
      */
     public function __destruct()
     {
-        if (true === (bool) $this->autoRemove) {
+        if (true === (bool) $this->autoDelete) {
             $this->delete();
         }
     }
